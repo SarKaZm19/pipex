@@ -66,5 +66,6 @@ void	ft_pipex(t_data *datas, char **env)
 	ft_close_pipes(datas);
 	waitpid_handler(datas, &exit_status);
 	ft_free_datas(datas);
-	exit(exit_status);
+	if (exit_status != 0)
+		exit(exit_status);
 }
