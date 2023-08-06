@@ -27,7 +27,7 @@ static char	*get_full_cmd(char *cmd, char **paths)
 			free(tmp);
 			if (access(path_to_check, X_OK) == 0)
 				return (path_to_check);
-			path_to_check = ft_free_str(path_to_check);
+			ft_free_str(path_to_check);
 		}
 	}
 	return (NULL);

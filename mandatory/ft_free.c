@@ -12,18 +12,16 @@
 
 #include "pipex.h"
 
-static void	ft_free_cmd(char **cmd)
+static void	ft_free_tab(char **tab)
 {
 	int	i;
 
+	if (!tab)
+		return ;
 	i = -1;
-	if (cmd)
-	{
-		while (cmd[++i])
-			cmd[i] = ft_free_str(cmd[i]);
-		free(cmd);
-		cmd = NULL;
-	}
+	while (tab[++i])
+		ft_free_str(tab[i]);
+	free(tab);
 }
 
 static void	ft_close_files(int outfile, int infile)
@@ -42,19 +40,10 @@ static void	ft_close_files(int outfile, int infile)
 
 void	ft_free_datas(t_data *datas)
 {
-	size_t	i;
-
 	ft_close_files(datas->infile, datas->outfile);
 	ft_free_str(datas->path_cmd1);
 	ft_free_str(datas->path_cmd2);
-	ft_free_cmd(datas->cmd1);
-	ft_free_cmd(datas->cmd2);
-	i = -1;
-	if (datas->paths)
-	{
-		while (datas->paths[++i])
-			datas->paths[i] = ft_free_str(datas->paths[i]);
-		free(datas->paths);
-		datas->paths = NULL;
-	}
+	ft_free_tab(datas->cmd1);
+	ft_free_tab(datas->cmd2);
+	ft_free_tab(datas->paths);
 }

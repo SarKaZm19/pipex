@@ -38,6 +38,6 @@ char	*ft_strdup(const char *s);
 char	*ft_strstr(const char *big, const char *little);
 
 // Added
-char	*ft_free_str(char *str);
+void	ft_free_str(char *str);
 
 #endif

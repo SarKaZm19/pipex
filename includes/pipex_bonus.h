@@ -60,14 +60,4 @@ void	error_msg(int ret_value, char *msg);
 // Free
 void	ft_free_datas(t_data *datas);
 
-// Utils
-size_t	ft_strlen(const char *str);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strdup(const char *s);
-char	**ft_split(const char *s, char c);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_free_str(char *str);
-
-
 #endif

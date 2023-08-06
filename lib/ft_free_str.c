@@ -12,12 +12,11 @@
 
 #include "minilibft.h"
 
-char	*ft_free_str(char *str)
+void	ft_free_str(char *str)
 {
 	if (str)
 	{
 		free(str);
 		str = NULL;
 	}
-	return (str);
 }

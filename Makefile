@@ -48,11 +48,11 @@ LIB_HEADERS = $(INCLUDES_DIR)/minilibft.h
 all: $(NAME)
 
 $(NAME): $(LIB_OBJS) $(MANDATORY_OBJS) 
-	@$(CC) $(CFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) -o $@ $^ -g
 	@printf "$(GREEN)$(NAME) created! (mandatory)$(DEFAULT)\n"
 
 bonus: $(LIB_OBJS) $(BONUS_OBJS) 
-	@$(CC) $(CFLAGS) -o $(NAME) $^
+	@$(CC) $(CFLAGS) -o $(NAME) $^ -g
 	@printf "$(GREEN)$(NAME) created! (bonus)$(DEFAULT)\n"
 
 %.o: %.c $(LIB_HEADERS) $(MANDATORY_HEADERS) $(BONUS_HEADERS)

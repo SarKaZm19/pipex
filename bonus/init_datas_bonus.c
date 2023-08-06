@@ -28,10 +28,10 @@ static void	get_args(t_data *datas,char **av)
 {
 	int	i;
 
-	i = -1;
-	datas->args = malloc(sizeof(char*) * (datas->nb_cmds));
+	datas->args = malloc(sizeof(char*) * (datas->nb_cmds + 1));
 	if (!datas->args)
 		syscall_error(datas, -1, "malloc: ");
+	i = -1;
 	while (++i < datas->nb_cmds)
 	{
 		datas->args[i] = ft_strdup(av[i]);

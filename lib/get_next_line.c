@@ -20,7 +20,7 @@ static char	*ft_add_buf_to_line(char *line, char *buf, ssize_t len)
 
 	line_len = ft_strlen(line);
 	if (!line_len && !len)
-		return (ft_free_str(line));
+		return (NULL);
 	new_line = malloc(sizeof(char) * (len + line_len + 1));
 	if (!new_line)
 		return (NULL);

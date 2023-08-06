@@ -7,11 +7,13 @@ static void	waitpid_handler(t_data *datas, int *exit_status)
 
 	while (datas->nb_cmds > 0)
 	{
-		w_pid = waitpid(-1, &status, WNOHANG);
+		w_pid = waitpid(-1, &status, 0);
 		if (w_pid == -1)
 		{
 			if(errno == EINTR)
 				continue;
+			else
+				syscall_error(datas, w_pid, "waitpid: ");
 		}
 		else if (w_pid > 0)
 		{
@@ -65,6 +67,7 @@ void	ft_pipex(t_data *datas, char **env)
 	}
 	ft_close_pipes(datas);
 	waitpid_handler(datas, &exit_status);
+	free(child_pids);
 	ft_free_datas(datas);
 	if (exit_status != 0)
 		exit(exit_status);
