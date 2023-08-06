@@ -1,7 +1,7 @@
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include <stdio.h> //a supprimer
+# include <stdio.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <unistd.h>
@@ -28,7 +28,10 @@ typedef struct s_data
 	int		cmd_i;
 	int		c_pid;
 	int		status;
+	int		pipe_closed;
 	int		*pipe;
+	int		*pipe_status;
+	pid_t	*child_pids;
 	char	*cmd_path;
 	char	**args;
 	char	**cmd;
@@ -41,10 +44,8 @@ void	ft_pipex(t_data *datas, char **env);
 
 //	Struct
 void	ft_init_datas(t_data *datas, int ac, char **av, char **env);
-//void	ft_heredoc(t_data *datas, int ac, char **av);
 
 // PATHS
-//char	**get_paths(char **env);
 char	*get_cmd_path(char *cmd, char **paths);
 
 // Pipes
@@ -59,5 +60,6 @@ void	error_msg(int ret_value, char *msg);
 
 // Free
 void	ft_free_datas(t_data *datas);
+void	ft_free_child(t_data *datas);
 
 #endif

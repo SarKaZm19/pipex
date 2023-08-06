@@ -33,6 +33,7 @@ typedef struct s_data
 	int		infile;
 	int		outfile;
 	int		pipe_fd[2];
+	int		pipe_status[2];
 	int		cmd1_status;
 	int		cmd2_status;
 	int		cpid_1;
@@ -56,6 +57,7 @@ char	*get_cmd_path(char *cmd, char **paths);
 // Errors
 void	syscall_error(t_data *datas, int ret_value, char *msg);
 void	cmd_error(t_data *datas, char *cmd);
+void	error_msg(int ret_value, char *msg);
 
 // Free
 void	ft_free_datas(t_data *datas);

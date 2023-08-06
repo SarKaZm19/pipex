@@ -12,6 +12,15 @@
 
 #include "pipex.h"
 
+static void	pipe_status(t_data *datas)
+{
+	datas->pipe_status[0] = -1;
+	datas->pipe_status[1] = -1;
+	syscall_error(datas, pipe(datas->pipe_fd), "pipe: ");
+	datas->pipe_status[0] = 0;
+	datas->pipe_status[1] = 0;
+}
+
 static void	init_datas(t_data *datas, char **av, char **env)
 {
 	datas->infile_name = av[1];
@@ -27,7 +36,7 @@ static void	init_datas(t_data *datas, char **av, char **env)
 	datas->cmd2_status = 0;
 	datas->path_cmd1 = NULL;
 	datas->path_cmd2 = NULL;
-	syscall_error(datas, pipe(datas->pipe_fd), "pipe: ");
+	pipe_status(datas);
 }
 
 int	main(int ac, char **av, char **env)

@@ -25,10 +25,20 @@ void	dup2_fill(t_data *datas)
 void	ft_close_pipes(t_data *datas)
 {
 	int	i;
+	int	close_ret;
 
 	i = -1;
 	while (++i < datas->nb_pipes)
-		syscall_error(datas, close(datas->pipe[i]), "close: ");
+	{
+		if (datas->pipe_status[i] != -1)
+		{
+			close_ret = close(datas->pipe[i]);
+			datas->pipe_status[i] = -1;
+			syscall_error(datas, close_ret, "close: ");
+		}
+	}
+	if (i == datas->nb_pipes)
+		datas->pipe_closed = 0;
 }
 
 void	ft_create_pipes(t_data *datas)
@@ -37,5 +47,9 @@ void	ft_create_pipes(t_data *datas)
 
 	i = -1;
 	while (++i < datas->nb_cmds - 1)
+	{
 		syscall_error(datas, pipe(datas->pipe + 2 * i), "pipe: ");
+		datas->pipe_status[i * 2] = 0;
+		datas->pipe_status[i * 2 + 1] = 0;
+	}
 }

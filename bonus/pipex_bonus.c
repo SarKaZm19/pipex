@@ -7,7 +7,7 @@ static void	waitpid_handler(t_data *datas, int *exit_status)
 
 	while (datas->nb_cmds > 0)
 	{
-		w_pid = waitpid(-1, &status, 0);
+		w_pid = waitpid(-1, &status, WNOHANG);
 		if (w_pid == -1)
 		{
 			if(errno == EINTR)
@@ -30,8 +30,9 @@ static void	ft_child_process(t_data *d, char **env)
 	syscall_error(d, d->c_pid, "fork: ");
 	if (!d->c_pid)
 	{
-		if ((d->cmd_i == 0 && d->infile != -1) || (d->cmd_i == d->nb_cmds - 1
-			&& d->outfile != -1) || (d->cmd_i > 0 && d->cmd_i < d->nb_cmds - 1))
+		if ((d->cmd_i == 0 && d->infile != -1)
+			|| ((d->cmd_i == d->nb_cmds - 1) && d->outfile != -1)
+				|| ((d->cmd_i < d->nb_cmds - 1) && d->cmd_i > 0))
 		{
 			dup2_fill(d);
 			ft_close_pipes(d);
@@ -41,33 +42,30 @@ static void	ft_child_process(t_data *d, char **env)
 			d->cmd_path = get_cmd_path(d->cmd[0], d->env_paths);
 			if (!d->cmd_path)
 				cmd_error(d, d->cmd[0]);
+			ft_free_child(d);
 			syscall_error(d, execve(d->cmd_path, d->cmd, env), "execve: ");
 		}
+		ft_free_datas(d);
 		exit(EXIT_FAILURE);
 	}
 }
 
 void	ft_pipex(t_data *datas, char **env)
 {
-	pid_t	*child_pids;
-	int		i;
 	int		exit_status;
 
-	child_pids = malloc(sizeof(pid_t) * datas->nb_cmds);
-	if (!child_pids)
-		syscall_error(datas, -1, "malloc: ");
-	i = -1;
-	datas->status = 0;
 	ft_create_pipes(datas);
-	while (++i < datas->nb_cmds)
+	datas->child_pids = malloc(sizeof(pid_t) * datas->nb_cmds);
+	if (!datas->child_pids)
+		syscall_error(datas, -1, "malloc: ");
+	datas->status = 0;
+	while (++(datas->cmd_i) < datas->nb_cmds)
 	{
-		datas->cmd_i = i;
 		ft_child_process(datas, env);
-		child_pids[i] = datas->c_pid;
+		datas->child_pids[datas->cmd_i] = datas->c_pid;
 	}
 	ft_close_pipes(datas);
 	waitpid_handler(datas, &exit_status);
-	free(child_pids);
 	ft_free_datas(datas);
 	if (exit_status != 0)
 		exit(exit_status);
