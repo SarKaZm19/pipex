@@ -35,9 +35,13 @@ size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s);
-char	*ft_strstr(const char *big, const char *little);
 
 // Added
 void	ft_free_str(char *str);
+void	ft_free_tab(char **tab);
+char	**ft_split(char const *s, char c);
+char	**ft_split_command(char const *s, char c);
+char	*ft_strndup(char *str, size_t len);
+char	*ft_strtrim(const char *s1, char const *set);
 
 #endif

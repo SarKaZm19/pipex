@@ -27,8 +27,8 @@ static void	init_datas(t_data *datas, char **av, char **env)
 	datas->outfile_name = av[4];
 	datas->infile = -1;
 	datas->outfile = -1;
-	datas->cmd1 = ft_split(av[2], ' ');
-	datas->cmd2 = ft_split(av[3], ' ');
+	datas->cmd1 = ft_parse_arg(av[2]);
+	datas->cmd2 = ft_parse_arg(av[3]);
 	if (!datas->cmd1 || !datas->cmd2)
 		syscall_error(datas, -1, "malloc: ");
 	datas->paths = get_paths(datas, env);

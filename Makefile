@@ -15,7 +15,8 @@ MANDATORY_SRCS =	$(MANDATORY_SRCS_DIR)/main.c \
                 	$(MANDATORY_SRCS_DIR)/pipex.c \
                 	$(MANDATORY_SRCS_DIR)/errors_handling.c \
                 	$(MANDATORY_SRCS_DIR)/paths.c \
-					$(MANDATORY_SRCS_DIR)/ft_free.c 
+					$(MANDATORY_SRCS_DIR)/parse_args.c \
+					$(MANDATORY_SRCS_DIR)/free.c 
 
 BONUS_SRCS =	$(BONUS_SRCS_DIR)/main_bonus.c \
 				$(BONUS_SRCS_DIR)/init_datas_bonus.c \
@@ -27,13 +28,16 @@ BONUS_SRCS =	$(BONUS_SRCS_DIR)/main_bonus.c \
 
 
 LIB_SRCS =		$(LIB_SRCS_DIR)/ft_free_str.c \
+				$(LIB_SRCS_DIR)/ft_free_tab.c \
 				$(LIB_SRCS_DIR)/ft_split.c \
+				$(LIB_SRCS_DIR)/ft_split_command.c \
+				$(LIB_SRCS_DIR)/ft_strtrim.c \
 				$(LIB_SRCS_DIR)/ft_strchr.c \
 				$(LIB_SRCS_DIR)/ft_strdup.c \
+				$(LIB_SRCS_DIR)/ft_strndup.c \
 				$(LIB_SRCS_DIR)/ft_strjoin.c \
 				$(LIB_SRCS_DIR)/ft_strlen.c \
 				$(LIB_SRCS_DIR)/ft_strncmp.c \
-				$(LIB_SRCS_DIR)/ft_strstr.c \
 				$(LIB_SRCS_DIR)/get_next_line.c \
 				$(LIB_SRCS_DIR)/get_next_line_utils.c 
 

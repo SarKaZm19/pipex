@@ -1,36 +1,18 @@
 #include "pipex_bonus.h"
 
-static void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	while (tab[++i])
-		ft_free_str(tab[i]);
-	free(tab);
-	tab = NULL;
-}
-
 static void	ft_close_files(t_data *datas)
 {
-	int	infile_close_val;
-	int	outfile_close_val;
-
 	if (datas->infile != -1)
 	{
-		infile_close_val = close(datas->infile);
+		close(datas->infile);
 		datas->infile = -1;
-		syscall_error(datas, infile_close_val, "close: ");
-		if (datas->here_doc == 1 && infile_close_val == 0 && datas->c_pid != 0)
+		if (datas->here_doc == 1 && datas->c_pid != 0)
 			syscall_error(datas, unlink(".heredoc_tmp"), "unlink: ");
 	}
 	if (datas->outfile != -1)
 	{
-		outfile_close_val = close(datas->outfile);
+		close(datas->outfile);
 		datas->outfile = -1;
-		syscall_error(datas, outfile_close_val, "close: ");
 	}
 }
 

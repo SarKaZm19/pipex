@@ -49,6 +49,7 @@ typedef struct s_data
 
 // Core
 int		ft_pipex(t_data *datas, char **env);
+char	**ft_parse_arg(char *s);
 
 // Paths
 char	**get_paths(t_data *datas, char **env);
@@ -57,7 +58,6 @@ char	*get_cmd_path(char *cmd, char **paths);
 // Errors
 void	syscall_error(t_data *datas, int ret_value, char *msg);
 void	cmd_error(t_data *datas, char *cmd);
-void	error_msg(int ret_value, char *msg);
 
 // Free
 void	ft_free_datas(t_data *datas);

@@ -24,6 +24,43 @@ static void	waitpid_handler(t_data *datas, int *exit_status)
 	}
 }
 
+static char	**ft_quote_trimmer(char **untrimmed)
+{
+	size_t	i;
+	char	*tmp;
+
+	i = 0;
+	while (untrimmed[i])
+	{
+		if (untrimmed[i][0] == '\'' || untrimmed[i][0] == '\"')
+		{
+			tmp = ft_strtrim(untrimmed[i], "\"\'");
+			if (!tmp)
+				return (NULL);
+			free(untrimmed[i]);
+			untrimmed[i] = ft_strdup(tmp);
+			free(tmp);
+			if (!untrimmed[i])
+				return (NULL);
+		}
+		i++;
+	}
+	return (untrimmed);
+}
+
+static char	**ft_parse_arg(char *s)
+{
+	char	**parsed_cmd;
+
+	parsed_cmd = ft_split_command(s, ' ');
+	if (!parsed_cmd)
+		return (NULL);
+	parsed_cmd = ft_quote_trimmer(parsed_cmd);
+	if (!parsed_cmd)
+		return (NULL);
+	return (parsed_cmd);
+}
+
 static void	ft_child_process(t_data *d, char **env)
 {
 	d->c_pid = fork();
@@ -36,7 +73,7 @@ static void	ft_child_process(t_data *d, char **env)
 		{
 			dup2_fill(d);
 			ft_close_pipes(d);
-			d->cmd = ft_split(d->args[d->cmd_i], ' ');
+			d->cmd = ft_parse_arg(d->args[d->cmd_i]);
 			if (!d->cmd)
 				syscall_error(d, -1, "malloc: ");
 			d->cmd_path = get_cmd_path(d->cmd[0], d->env_paths);

@@ -12,18 +12,6 @@
 
 #include "pipex.h"
 
-void	error_msg(int ret_value, char *msg)
-{
-	if (ret_value == -1)
-	{
-		write(2, "pipex: ", 8);
-		write(2, msg, ft_strlen(msg));
-		write(2, ": ", 2);
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-		write(2, "\n", 1);
-	}
-}
-
 void	cmd_error(t_data *datas, char *cmd)
 {
 	write(2, "pipex: ", 8);

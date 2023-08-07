@@ -12,58 +12,14 @@
 
 #include "minilibft.h"
 
-static char	**ft_free_return(char **tab)
+static size_t	ft_partlen(char *str, char c)
 {
 	size_t	i;
 
 	i = 0;
-	if (!tab)
-		return (NULL);
-	while (tab[i])
-	{
-		free(tab[i]);
+	while (str[i] && str[i] != c)
 		i++;
-	}
-	free(tab);
-	tab = NULL;
-	return (tab);
-}
-
-static size_t	ft_partlen(char *tmp, char c)
-{
-	size_t	count;
-	size_t	i;
-
-	count = 0;
-	i = 0;
-	while (tmp[i] == c)
-		i++;
-	while (tmp[i])
-	{
-		i++;
-		count++;
-		if (tmp[i] == c)
-			return (count);
-	}
-	return (count);
-}
-
-static char	*ft_splitdup(char *str, size_t len)
-{
-	size_t	i;
-	char	*dup;
-
-	i = 0;
-	dup = malloc(sizeof(char) * (len + 1));
-	if (!dup)
-		return (NULL);
-	while (i < len && str[i])
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	return (i);
 }
 
 static char	**ft_get_strs_tab(char **tab, char *tmp, size_t nb_parts, char c)
@@ -74,45 +30,52 @@ static char	**ft_get_strs_tab(char **tab, char *tmp, size_t nb_parts, char c)
 
 	i = 0;
 	j = 0;
-	while (j < nb_parts && tmp[i])
+	while (j < nb_parts)
 	{
 		while (tmp[i] == c)
 			i++;
 		part_len = ft_partlen(tmp + i, c);
-		tab[j] = ft_splitdup(tmp + i, part_len);
+		tab[j] = ft_strndup(tmp + i, part_len);
 		if (!tab[j])
-			return (ft_free_return(tab));
-		i = i + part_len;
+			return (ft_free_tab(tab), NULL);
+		i += part_len;
 		j++;
 	}
-	tab[j] = 0;
+	tab[j] = '\0';
 	return (tab);
+}
+
+static size_t	ft_word_count(char *str, char c)
+{
+	size_t	i;
+	size_t	nb_word;
+
+	i = 0;
+	nb_word = 0;
+	while (str[i])
+	{
+		while (str[i] == c)
+			i++;
+		if (str[i] && str[i] != c)
+			nb_word++;
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (nb_word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**tab;
+	char	**strs;
 	char	*tmp;
 	size_t	nb_parts;
-	size_t	i;
 
 	if (!s)
 		return (NULL);
 	tmp = (char *)s;
-	i = 0;
-	nb_parts = 0;
-	while (tmp[i] != '\0')
-	{
-		while (tmp[i] != '\0' && tmp[i] == c)
-			i++;
-		if (tmp[i] && tmp[i] != c)
-			nb_parts++;
-		while (tmp[i] && tmp[i] != c)
-			i++;
-	}
-	tab = malloc(sizeof(char *) * (nb_parts + 1));
-	if (!tab)
+	nb_parts = ft_word_count(tmp, c);
+	strs = malloc(sizeof(char *) * (nb_parts + 1));
+	if (!strs)
 		return (NULL);
-	tab = ft_get_strs_tab(tab, tmp, nb_parts, c);
-	return (tab);
+	return (ft_get_strs_tab(strs, tmp, nb_parts, c));
 }
