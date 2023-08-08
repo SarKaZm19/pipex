@@ -43,10 +43,7 @@ void	ft_free_child(t_data *datas)
 	free(datas->args);
 	datas->args = NULL;
 	ft_free_tab(datas->env_paths);
-	if (datas->cmd_i == 0)
-		close(datas->infile);
-	if (datas->cmd == datas->nb_cmds -1)
-		close(datas->outfile);
+	ft_close_files(datas);
 }
 
 void	ft_free_datas(t_data *datas)
@@ -65,6 +62,5 @@ void	ft_free_datas(t_data *datas)
 		datas->child_pids = NULL;
 	}
 	ft_free_pipes(datas);
-	if (datas->infile && datas->outfile)
-		ft_close_files(datas);
+	ft_close_files(datas);
 }
