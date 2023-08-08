@@ -32,25 +32,14 @@ void	ft_free_pipes(t_data *datas)
 	}
 }
 
-void	ft_free_child(t_data *datas)
-{
-	free(datas->pipe);
-	datas->pipe = NULL;
-	free(datas->pipe_status);
-	datas->status = NULL;
-	free(datas->child_pids);
-	datas->child_pids = NULL;
-	free(datas->args);
-	datas->args = NULL;
-	ft_free_tab(datas->env_paths);
-	ft_close_files(datas);
-}
-
 void	ft_free_datas(t_data *datas)
 {
-	ft_free_tab(datas->cmd);
-	ft_free_str(datas->cmd_path);
-	ft_free_tab(datas->env_paths);
+	if (datas->c_pid != 0)
+	{
+		ft_free_tab(datas->cmd);
+		ft_free_str(datas->cmd_path);
+		ft_free_tab(datas->env_paths);	
+	}
 	if (datas->args)
 	{
 		free(datas->args);
