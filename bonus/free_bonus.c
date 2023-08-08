@@ -35,10 +35,18 @@ void	ft_free_pipes(t_data *datas)
 void	ft_free_child(t_data *datas)
 {
 	free(datas->pipe);
+	datas->pipe = NULL;
 	free(datas->pipe_status);
+	datas->status = NULL;
 	free(datas->child_pids);
+	datas->child_pids = NULL;
 	free(datas->args);
+	datas->args = NULL;
 	ft_free_tab(datas->env_paths);
+	if (datas->cmd_i == 0)
+		close(datas->infile);
+	if (datas->cmd == datas->nb_cmds -1)
+		close(datas->outfile);
 }
 
 void	ft_free_datas(t_data *datas)
