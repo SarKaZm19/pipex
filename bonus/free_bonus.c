@@ -34,12 +34,10 @@ void	ft_free_pipes(t_data *datas)
 
 void	ft_free_child(t_data *datas)
 {
-	if (datas->pipe)
-		free(datas->pipe);
-	if (datas->pipe_closed)
-		free(datas->pipe_status);
-	if (datas->child_pids)
-		free(datas->child_pids);
+	free(datas->pipe);
+	free(datas->pipe_status);
+	free(datas->child_pids);
+	free(datas->args);
 	ft_free_tab(datas->env_paths);
 }
 
