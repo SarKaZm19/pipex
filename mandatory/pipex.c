@@ -66,8 +66,9 @@ static void	parent_process(t_data *datas)
 	waitpid_handler(datas->cpid_2, &datas->cmd2_status);
 	if (WIFEXITED(datas->cmd2_status))
 		datas->cmd2_status = WEXITSTATUS(datas->cmd2_status);
-	ft_free_datas(datas);
-	exit(datas->cmd2_status);
+	ft_free_datas(datas);+
+	if (datas->cmd2_status != 0)
+		exit(datas->cmd2_status);
 }
 
 int	ft_pipex(t_data *datas, char **env)
