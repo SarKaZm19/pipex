@@ -79,7 +79,7 @@ static void	ft_child_process(t_data *d, char **env)
 			d->cmd_path = get_cmd_path(d->cmd[0], d->env_paths);
 			if (!d->cmd_path)
 				cmd_error(d, d->cmd[0]);
-			ft_free_child(d);
+			ft_free_datas(d);
 			syscall_error(d, execve(d->cmd_path, d->cmd, env), "execve: ");
 		}
 		ft_free_datas(d);
