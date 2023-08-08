@@ -60,6 +60,5 @@ void	error_msg(int ret_value, char *msg);
 
 // Free
 void	ft_free_datas(t_data *datas);
-void	ft_free_child(t_data *datas);
 
 #endif
