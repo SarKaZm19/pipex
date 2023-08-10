@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:04:47 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:05:00 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 static void	waitpid_handler(t_data *datas, int *exit_status)
@@ -10,8 +22,8 @@ static void	waitpid_handler(t_data *datas, int *exit_status)
 		w_pid = waitpid(-1, &status, WNOHANG);
 		if (w_pid == -1)
 		{
-			if(errno == EINTR)
-				continue;
+			if (errno == EINTR)
+				continue ;
 			else
 				syscall_error(datas, w_pid, "waitpid: ");
 		}
@@ -69,7 +81,7 @@ static void	ft_child_process(t_data *d, char **env)
 	{
 		if ((d->cmd_i == 0 && d->infile != -1)
 			|| ((d->cmd_i == d->nb_cmds - 1) && d->outfile != -1)
-				|| ((d->cmd_i < d->nb_cmds - 1) && d->cmd_i > 0))
+			|| ((d->cmd_i < d->nb_cmds - 1) && d->cmd_i > 0))
 		{
 			dup2_fill(d);
 			ft_close_pipes(d);

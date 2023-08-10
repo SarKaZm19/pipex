@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:04:38 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:04:39 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	ft_init_struct(t_data *datas)
@@ -20,7 +32,7 @@ void	ft_init_struct(t_data *datas)
 	datas->env_paths = NULL;
 }
 
-int	main (int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_data	datas;
 

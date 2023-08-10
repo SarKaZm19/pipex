@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:04:26 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:04:27 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 static void	ft_close_files(t_data *datas)
@@ -38,7 +50,6 @@ void	ft_free_datas(t_data *datas)
 	{
 		ft_free_tab(datas->cmd);
 		ft_free_str(datas->cmd_path);
-		ft_free_tab(datas->env_paths);	
 	}
 	if (datas->args)
 	{
@@ -50,6 +61,7 @@ void	ft_free_datas(t_data *datas)
 		free(datas->child_pids);
 		datas->child_pids = NULL;
 	}
+	ft_free_tab(datas->env_paths);
 	ft_free_pipes(datas);
 	ft_close_files(datas);
 }

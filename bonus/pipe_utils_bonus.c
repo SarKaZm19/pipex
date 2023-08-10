@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe_utils_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:04:43 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:04:44 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	dup2_fill(t_data *datas)
@@ -9,16 +21,16 @@ void	dup2_fill(t_data *datas)
 	}
 	else if (datas->cmd_i == datas->nb_cmds - 1)
 	{
-		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i - 2], 0)
-			, "dup2: ");
+		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i - 2], 0),
+			"dup2: ");
 		syscall_error(datas, dup2(datas->outfile, 1), "dup2: ");
 	}
 	else
 	{
-		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i - 2], 0)
-			, "dup2: ");
-		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i + 1], 1)
-			, "dup2: ");
+		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i - 2], 0),
+			"dup2: ");
+		syscall_error(datas, dup2(datas->pipe[2 * datas->cmd_i + 1], 1),
+			"dup2: ");
 	}
 }
 

@@ -26,7 +26,7 @@ static char	*get_full_cmd(char *cmd, char **paths)
 	char	*path_to_check;
 
 	if (!paths || !paths[0])
-		return(path_in_cmd(cmd));
+		return (path_in_cmd(cmd));
 	else
 	{
 		i = -1;
@@ -35,7 +35,7 @@ static char	*get_full_cmd(char *cmd, char **paths)
 			tmp = ft_strjoin(paths[i], "/");
 			path_to_check = ft_strjoin(tmp, cmd);
 			if (!tmp || !path_to_check)
-				return (NULL);				
+				return (NULL);
 			free(tmp);
 			if (access(path_to_check, X_OK) == 0)
 				return (path_to_check);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_datas_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:04:34 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:04:35 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 static char	**get_paths(t_data *datas, char **env)
@@ -24,11 +36,11 @@ static char	**get_paths(t_data *datas, char **env)
 	return (NULL);
 }
 
-static void	get_args(t_data *datas,char **av)
+static void	get_args(t_data *datas, char **av)
 {
 	int	i;
 
-	datas->args = malloc(sizeof(char*) * (datas->nb_cmds + 1));
+	datas->args = malloc(sizeof(char *) * (datas->nb_cmds + 1));
 	if (!datas->args)
 		syscall_error(datas, -1, "malloc: ");
 	i = -1;
@@ -54,7 +66,7 @@ void	here_doc_gnl(t_data *datas, char *delimiter)
 		if (!new_line)
 			syscall_error(datas, -1, "malloc: ");
 		if (!ft_strncmp(new_line, delimiter, ft_strlen(delimiter)))
-			break;
+			break ;
 		else
 			write(datas->infile, new_line, ft_strlen(new_line));
 	}
@@ -72,8 +84,8 @@ void	here_doc(t_data *datas, int ac, char **av)
 		if (datas->infile == -1)
 			syscall_error(datas, unlink(".heredoc_tmp"), "unlink: ");
 	}
-	datas->outfile = open(av[ac - 1]
-		, O_RDWR | O_APPEND | O_CLOEXEC | O_CREAT, 0644);
+	datas->outfile = open(av[ac - 1],
+			O_RDWR | O_APPEND | O_CLOEXEC | O_CREAT, 0644);
 	error_msg(datas->outfile, av[ac - 1]);
 	datas->here_doc = 1;
 }
@@ -86,8 +98,8 @@ void	ft_init_datas(t_data *datas, int ac, char **av, char **env)
 	{
 		datas->infile = open(av[1], O_RDONLY | O_CLOEXEC);
 		error_msg(datas->infile, av[1]);
-		datas->outfile = open(av[ac - 1]
-			, O_WRONLY | O_TRUNC | O_CLOEXEC | O_CREAT, 0644);
+		datas->outfile = open(av[ac - 1],
+				O_WRONLY | O_TRUNC | O_CLOEXEC | O_CREAT, 0644);
 		error_msg(datas->outfile, av[ac - 1]);
 	}
 	datas->nb_cmds = ac - 3 - datas->here_doc;

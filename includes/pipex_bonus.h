@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:14:44 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:14:44 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
@@ -9,13 +21,11 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-
 # include "minilibft.h"
-
 # ifndef USAGE_BONUS_ERROR
-# define USAGE_BONUS_ERROR "./pipex infile cmd1 cmd2 cmd3 [...] cmdn outfile\n\
+#  define USAGE_BONUS_ERROR "./pipex infile cmd1 cmd2 cmd3 [...] cmdn outfile\n\
 	or\n./pipex here_doc LIMITER cmd1 cmd2 cmd3 [...] cmdn outfile\n"
-#endif
+# endif
 
 typedef struct s_data
 {

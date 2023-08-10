@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_command.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/09 17:13:20 by fvastena          #+#    #+#             */
+/*   Updated: 2023/08/09 17:13:21 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minilibft.h"
 
 static size_t	ft_skip_quotes(char *str)
@@ -11,7 +23,7 @@ static size_t	ft_skip_quotes(char *str)
 		while (str[i] != '\'')
 			i++;
 	}
-	else if ((str[i] == '\"'))
+	else if (str[i] == '\"')
 	{
 		i++;
 		while (str[i] != '\"')
@@ -52,7 +64,7 @@ static char	**ft_get_strs_tab(char **strs, char *tmp, size_t nb_parts, char c)
 		i += part_len;
 		j++;
 	}
-	strs[j] = '\0';
+	strs[j] = NULL;
 	return (strs);
 }
 
@@ -81,5 +93,5 @@ char	**ft_split_command(char const *s, char c)
 	tab = malloc(sizeof(char *) * (nb_parts + 1));
 	if (!tab)
 		return (NULL);
-	return(ft_get_strs_tab(tab, tmp, nb_parts, c));
+	return (ft_get_strs_tab(tab, tmp, nb_parts, c));
 }

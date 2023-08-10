@@ -21,9 +21,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-
-#include "minilibft.h"
-
+# include "minilibft.h"
 # ifndef USAGE_ERROR
 #  define USAGE_ERROR "-pipex: usage: ./pipex infile cmd1 cmd2 outfile\n"
 # endif

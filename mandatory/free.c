@@ -38,10 +38,11 @@ static void	ft_close_fds(int outfile, int infile, int *pipe, int *pipe_status)
 
 void	ft_free_datas(t_data *datas)
 {
+	ft_free_tab(datas->paths);
 	ft_free_str(datas->path_cmd1);
 	ft_free_str(datas->path_cmd2);
 	ft_free_tab(datas->cmd1);
 	ft_free_tab(datas->cmd2);
-	ft_free_tab(datas->paths);
-	ft_close_fds(datas->infile, datas->outfile, datas->pipe_fd, datas->pipe_status);
+	ft_close_fds(datas->infile, datas->outfile, datas->pipe_fd,
+		datas->pipe_status);
 }

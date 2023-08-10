@@ -41,7 +41,7 @@ static char	**ft_get_strs_tab(char **tab, char *tmp, size_t nb_parts, char c)
 		i += part_len;
 		j++;
 	}
-	tab[j] = '\0';
+	tab[j] = NULL;
 	return (tab);
 }
 
